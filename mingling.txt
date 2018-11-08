@@ -1,0 +1,21 @@
+1.cd mysql/bin/
+2.mysql.exe -h 127.0.0.1 -uroot -p
+3.use 数据库
+4.show tables 展示数据表
+5.create table t1(
+->id int primary key auto_increment),  主键索引:数据不可重复
+->name varchar(100);
+6.desc t1 展示表的数据结构
+7.alter table t2 add unique index(name); 唯一索引：内容不可重复，一般在where条件后面加
+8.alter table t2 add index(age);普通索引
+9.alter table t2 add index(age,name);组合索引
+10.表存储引擎：innodb
+	      mysiam:FRM(表框架信息)MYD(表数据信息)MYI(表索引信息)
+11.explain select * from t4 where name="111"查看索引  这样子查询效率会变得非常低
+加索引：alter table t4 add index(name);加个普通索引搜索速度就会变快
+12.存储单位之间的换算
+1T = 1024G;1G = 1024M;1M = 1024KB;1KB = 1024B;1B = 8BIT
+《1》在int中，8BIT = 11111111;二进制为0或1，此时代表2的8次方，最大存储的数字为256，一分为二为正负127，int最大存储的数字不能超过127；127代表数字。1字节做大存储数为127
+《2》在字符串中，1字节代表1字节，在mysql中单字节字符按一个字符存储，多字节字符也按照单字节字符存储。
+13.编码问题：数据库编码默认为latin1,如果要存储中文，需要将表的编码改为utf8
+14.

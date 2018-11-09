@@ -1,0 +1,7 @@
+Î±¾²Ì¬µÄÀí½â£º
+
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} ".*html"
+RewriteRule (.*).html index.php?id=$1
+</IfModule>

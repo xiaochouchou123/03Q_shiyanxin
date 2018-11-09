@@ -1,0 +1,35 @@
+1.命名空间：
+防止类名的命名冲突 
+namespace a\b\c;(将类放到某一个路径下)
+require "./A.php";
+use a\b\c\A as Test;
+$obj = new Test();
+$obj->aa();
+
+2.网络请求的原理											nginx	                     php-fpm(管理fastcgi),启动php
+master（主） ->slave（从）  ——————》php ------->mysql（主） --->mysql（从）      
+             ->slave（从）  ——————》                        --->mysql（从）
+请求首先经过主master反向代理，在经过php处理，去请求数据库，再顺序返回给服务器，将数据显示在浏览器上
+
+nginx的主从结构就是反向代理，如果master崩溃，会有一个双击热备，就是备份来继承master的IP地址
+
+大的公司还会有左右机房，这套崩溃就用下一套
+
+3.反向代理的代码操作
+百度关键字：Nginx配置upsteream实现负载均衡
+cd /usr/local/nginx/conf/
+vim nginx.conf
+server{
+	location / {
+root html;
+index index.html index.htm;
+proxy_pass http://test;
+
+}
+}
+
+
+upstream test{
+server 192.168.132.133:80 weight=1;
+server 192.168.132.134:80 weight=1;
+}

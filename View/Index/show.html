@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>展示页面</title>
+</head>
+<body>
+<center>
+	<table>
+		<a href="__URL__/index">返回添加</a>
+		<tr>
+			<td>商品名称</td>
+			<td>商品描述</td>
+			<td>商品图片</td>
+			<td>操作</td>
+		</tr>
+		<volist name="data" id="v">
+		<tr>
+			<td>{$v.user}</td>
+			<td>{$v.text}</td>
+			<td><img src="__PUBLIC__/{$v.img}" height="80"></td>
+			<td><button id="btn">删除</button></td>
+		</tr>
+	</volist>
+	
+	</table>{$page}
+</center>
+
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#btn").click(function(){
+		$.ajax({
+		type:"post"; 
+		url:"__URL__/show"; 
+		data:"data":"data";
+		success:function(data){ //data为响应文本，返回值
+			if (data==1) {
+				
+			};
+
+		}
+	})
+		})
+	})
+</script>

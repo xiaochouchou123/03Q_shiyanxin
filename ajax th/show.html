@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>展示数据</title>
+</head>
+<body>
+	<center><h1>商品展示</h1>
+		<input type="text" name="search" value="search" id="search"><button id="btn">点击搜索</button>
+<div id="box">
+	<table>
+		
+		<tr>
+			<td>ID</td>
+			<td>商品名称</td>
+			<td>商品分类</td>
+			<td>操作</td>
+		</tr>
+
+		<volist name="data" id="v">
+		<tr>
+			<td>{$v.id}</td>
+			<td>{$v.user}</td>
+			<td>{$v.text}</td>
+			<td><button class="del" value="{$v.id}">删除</button></td>
+		</tr>
+	</volist>
+
+	</table>
+	{$page}
+</div>
+
+	</center>
+
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/jquery.js"></script>
+<script type="text/javascript">
+	//html()代表html页面内容
+	//text()代表input文本框内容
+	//val()用来获取文本框内容和value值
+
+//ajax删除
+$(document).on("click",".del",function(){
+	var id = $(this).val();
+			// alert(id);
+			$.ajax({
+				type:"post",
+				url:"__URL__/del",
+				data:{"id":id},
+				success:function(data){ //data为响应文本，返回值
+					// alert(data)
+						$("#box").html(data);
+						// location.reload() 
+				}
+			})
+})
+
+
+//ajax搜索替换
+$(document).on("click","#btn",function(){
+	var search = $("#search").val();
+	$.ajax({
+		type:"post",
+		url:"__URL__/sou",
+		data:{"data":search},
+		success:function(msg){ 		
+		$("#box").html(msg);
+
+		}
+	})
+})
+
+</script>

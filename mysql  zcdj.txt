@@ -1,0 +1,43 @@
+数据库主从配置，将资料一式三分备份，写的话走主服务器，副的话走从服务器，减轻主服务器的压力
+
+配置步骤：
+1.配置F:\phpstudy\PHPTutorial\MySQL下面的data和my.ini,这2个文件总是成对出现。	
+2.mysqld.exe --install mysql_3307 --defaults-file="F:\phpstudy\PHPTutorial\MySQL\my_3307.ini" 注册服务
+3.net start mysql_3307 启动服务
+4.在my.ini中配置binlog
+log-bin=mysql-bin
+server-id=10
+每个服务的server-id不能一样
+5.如何查看binlog日志
+mysqlbinlog.exe --help | more
+6.mysql主从连接
+主服务器设置
+进入每个服务器端口对应的数据库
+mysql.exe -h 127.0.0.1 -uroot -P 3307 -p  输入密码:root
+创建用户名：
+Grant all privileges on *.*  to 'lisi'@'192.168.%.%' identified by "123456";
+从服务器设置：
+change master to master_host="192.168.51.10",（你的本机IP）
+master_user="lisi",master_password="123456",（你在主服务器创建的用户名密码）
+master_log_file="mysql-bin.000001",
+master_log_pos=1594;
+（show master status;用这个命令查看之后进行修改）
+主从都使用的命令：
+slave start;启动slave
+show slave status\G;查看slave的状态
+
+
+
+
+
+
+
+
+
+调错关键点
+1.计算机-》管理-》服务和应用程序-》服务-》找到mysql服务
+2.show master status;可以查看master数据库当前正在使用的二进制日志及当前执行二进制日志位置
+3.slave报错的话 调错
+slave stop;停止slave
+reset slave;重置slave
+重新配置之后重启服务，如步骤1；

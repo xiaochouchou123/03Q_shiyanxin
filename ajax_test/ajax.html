@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ajax替换操作</title>
+</head>
+<body>
+<div>
+	<input type="text" name="num"><input type="text" name="user" id="b">
+</div>
+<button id="btn" checked="checked">点击复制</button>
+<button id="btns">点击提交</button>
+<button id="tab">生成表格</button>
+<div id="box">
+	
+</div>
+</body>
+</html>
+<script type="text/javascript" src="__PUBLIC__/jquery.js"></script>
+<script type="text/javascript">
+	var i = 0;
+	$(document).on("click","#btn",function(){
+	i++;
+	if (i<5) {
+		$("input[name='user']").after("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type='text' name='username'>");
+	}
+})
+	
+//数据传输
+	$(document).on("click","#btns",function(){
+		var num = $("input:eq(0)").val();
+		var b = $("input:eq(1)").val();
+		var c = $("input:eq(2)").val();
+		var d = $("input:eq(3)").val();
+		var e = $("input:eq(4)").val();
+		var f = $("input:eq(5)").val();
+
+		$.ajax({
+		type:"post",
+		url:"__URL__/add",
+		data:{"num":num,"b":b,"c":c,"d":d,"e":e,"f":f},
+		success:function(msg){ 
+				alert(msg);
+
+		}
+	})
+	})
+
+
+//生成表格
+	$(document).on("click","#tab",function(){
+		var data = 1;
+		$.ajax({
+		type:"post",
+		url:"__URL__/sel",
+		data:{"data":data},
+		success:function(msg){ 
+		$("#box").html(msg);
+
+
+		}
+	})
+		})
+</script>

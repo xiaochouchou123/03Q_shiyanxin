@@ -1,0 +1,34 @@
+表名：detail
+字段           类型      长度    名称    注释             
+detail_id      int        11     ID       主键非空
+product_name   varchar    50     商品名称
+time           datetime   11     添加时间 
+price          float      2      商品价格
+status         tinyint    10     状态
+number         tinyint    11     商品单号
+pay_type       tinyint    10     支付方式
+logistics      varchar    50     配送方式
+user_id        tinyint    10     业务员
+
+
+表名：paytype
+字段      类型      长度      名称                注释
+pay_type   int      10        支付方式的关联ID    主键非空
+paytype    varchar   50        支付方式           0支付宝，1QQ钱包，2微信，3，现金 
+
+
+
+
+表名：user
+字段      类型      长度      名称                注释
+user_id   int      10        业务员的关联ID    主键非空
+user    varchar   50         业务员         0春生，1夏利，2秋生，3，冬子 
+
+
+
+
+
+表名：logistic
+字段      类型          长度         名称                注释
+logistic_id   int      10        配送的关联ID          主键非空
+logostic  varchar      50        配送方式             0顺丰，1韵达，2邮政，3，天天快递 
